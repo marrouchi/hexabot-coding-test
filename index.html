@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexabot AI Coding Agent - Demo</title>
+    <title>Hexabot AI Coding Agent - Accelerate Your Development</title>
     <style>
         * {
             margin: 0;
@@ -11,73 +11,114 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fafbfc;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 60px 40px;
-            text-align: center;
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
         }
 
-        .logo {
-            font-size: 48px;
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero-icon {
+            font-size: 80px;
             margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
         }
 
-        h1 {
-            font-size: 36px;
-            color: #333;
-            margin-bottom: 10px;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        .description {
-            font-size: 18px;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
-
-        .feature {
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .feature h3 {
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .feature p {
-            color: #666;
-            font-size: 14px;
+        .hero .subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
         }
 
         .cta-buttons {
@@ -85,108 +126,546 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: 40px;
         }
 
-        button {
-            padding: 12px 30px;
+        button, .btn {
+            padding: 14px 36px;
             font-size: 16px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         .primary-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: white;
+            color: #667eea;
         }
 
         .primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .secondary-btn {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
         }
 
         .secondary-btn:hover {
-            background: #f8f9fa;
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
         }
 
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+        /* Section Styles */
+        section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        section .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-card .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0f4ff 100%);
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-item .check {
+            color: #667eea;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .benefit-item h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .use-case {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-left: 4px solid #764ba2;
+        }
+
+        .use-case .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .use-case h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .use-case p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            color: #667eea;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 40px;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
             color: #999;
+            padding: 50px 40px 30px;
+            text-align: center;
             font-size: 14px;
         }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 20px;
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #764ba2;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
             }
 
-            h1 {
-                font-size: 28px;
+            .nav-links {
+                gap: 15px;
+                flex-direction: column;
+                text-align: center;
             }
 
-            .features {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 60px 20px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .hero-icon {
+                font-size: 60px;
             }
 
             .cta-buttons {
                 flex-direction: column;
             }
 
-            button {
+            button, .btn {
                 width: 100%;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            section h2 {
+                font-size: 32px;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats {
+                gap: 25px;
+            }
+
+            .stat-item h3 {
+                font-size: 36px;
+            }
+
+            .cta-section h2 {
+                font-size: 32px;
+            }
+
+            .cta-section p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            section h2 {
+                font-size: 24px;
+            }
+
+            .logo-text {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">🤖</div>
-        <h1>Hexabot AI Coding Agent</h1>
-        <p class="subtitle">Intelligent Assistant for Coding Tasks</p>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-text">🤖 Hexabot</div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#use-cases">Use Cases</a></li>
+            <li><a href="#cta">Demo</a></li>
+        </ul>
+    </nav>
 
-        <p class="description">
-            Experience the power of AI-assisted development. Hexabot helps you write better code,
-            faster. Get intelligent suggestions, automated refactoring, and real-time debugging support.
-        </p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🤖</div>
+            <h1>Hexabot AI Coding Agent</h1>
+            <p class="subtitle">Your Intelligent Partner for Accelerated Software Development</p>
+            <div class="cta-buttons">
+                <button class="primary-btn">Start Free Demo</button>
+                <button class="secondary-btn">Learn More</button>
+            </div>
+        </div>
+    </section>
 
-        <div class="features">
-            <div class="feature">
-                <h3>⚡ Smart Code Completion</h3>
-                <p>Context-aware suggestions that understand your codebase</p>
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Powerful Features</h2>
+        <p class="subtitle">Everything you need for faster, smarter coding</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Smart Code Completion</h3>
+                <p>Context-aware suggestions that understand your entire codebase and project structure</p>
             </div>
-            <div class="feature">
-                <h3>🔍 Code Analysis</h3>
-                <p>Real-time bug detection and performance insights</p>
+            <div class="feature-card">
+                <div class="icon">🔍</div>
+                <h3>Advanced Code Analysis</h3>
+                <p>Real-time bug detection, performance optimization, and security vulnerability scanning</p>
             </div>
-            <div class="feature">
-                <h3>✨ Refactoring</h3>
-                <p>Automated code improvements and cleanup</p>
+            <div class="feature-card">
+                <div class="icon">✨</div>
+                <h3>Automated Refactoring</h3>
+                <p>Intelligent code improvements and architectural cleanup with instant feedback</p>
             </div>
-            <div class="feature">
-                <h3>📚 Documentation</h3>
-                <p>Generate comprehensive docs from your code</p>
+            <div class="feature-card">
+                <div class="icon">📚</div>
+                <h3>Auto Documentation</h3>
+                <p>Generate comprehensive, well-structured documentation from your code automatically</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🧪</div>
+                <h3>Test Generation</h3>
+                <p>Create comprehensive unit and integration tests with comprehensive coverage</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>Performance Tuning</h3>
+                <p>Identify bottlenecks and receive actionable optimization recommendations</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <h2>Why Choose Hexabot?</h2>
+        <p class="subtitle">Transform your development workflow</p>
+
+        <div class="benefits-list">
+            <div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Save Development Time</h4>
+                        <p>Reduce coding time by up to 40% with intelligent automation</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Improve Code Quality</h4>
+                        <p>Maintain higher standards with AI-powered code reviews</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Learn Best Practices</h4>
+                        <p>Get real-time guidance on coding standards and patterns</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Reduce Bugs</h4>
+                        <p>Catch issues before they reach production</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Multi-Language Support</h4>
+                        <p>Works seamlessly with Python, JavaScript, Java, Go, and more</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <h4>Easy Integration</h4>
+                        <p>Integrates with your existing tools and workflows</p>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="stats">
+            <div class="stat-item">
+                <h3>40%</h3>
+                <p>Faster Development</p>
+            </div>
+            <div class="stat-item">
+                <h3>60%</h3>
+                <p>Fewer Bugs</p>
+            </div>
+            <div class="stat-item">
+                <h3>10K+</h3>
+                <p>Developers Trust Us</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases">
+        <h2>Versatile Use Cases</h2>
+        <p class="subtitle">Hexabot adapts to your development needs</p>
+
+        <div class="use-cases">
+            <div class="use-case">
+                <div class="number">1</div>
+                <h4>Feature Development</h4>
+                <p>Build features faster with intelligent code suggestions and architecture guidance</p>
+            </div>
+            <div class="use-case">
+                <div class="number">2</div>
+                <h4>Bug Fixing</h4>
+                <p>Quickly identify root causes and generate targeted solutions</p>
+            </div>
+            <div class="use-case">
+                <div class="number">3</div>
+                <h4>Code Review</h4>
+                <p>Automated pre-review analysis before human code review</p>
+            </div>
+            <div class="use-case">
+                <div class="number">4</div>
+                <h4>Migration & Refactoring</h4>
+                <p>Safely modernize legacy code with AI-assisted transformation</p>
+            </div>
+            <div class="use-case">
+                <div class="number">5</div>
+                <h4>Learning & Onboarding</h4>
+                <p>Help junior developers learn through interactive guidance</p>
+            </div>
+            <div class="use-case">
+                <div class="number">6</div>
+                <h4>Documentation</h4>
+                <p>Auto-generate and maintain up-to-date project documentation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="cta-section">
+        <h2>Ready to Transform Your Coding?</h2>
+        <p>Join thousands of developers using Hexabot to code smarter and faster</p>
         <div class="cta-buttons">
-            <button class="primary-btn">Get Started</button>
-            <button class="secondary-btn">Learn More</button>
+            <button class="primary-btn">Start Your Free Demo</button>
+            <button class="secondary-btn">Schedule a Consultation</button>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>Hexabot AI Coding Agent © 2026. Powered by advanced language models.</p>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#features">Features</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#use-cases">Use Cases</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact</a>
         </div>
-    </div>
+        <p>Hexabot AI Coding Agent © 2026. Powered by advanced language models.</p>
+        <p>Transforming the future of software development</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Demo starting... (This is a placeholder for the actual demo experience)');
+            });
+        });
+    </script>
 </body>
 </html>
