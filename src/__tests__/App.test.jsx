@@ -39,4 +39,29 @@ describe('App', () => {
     expect(elements[0].tagName).toBe('HEADER')
     expect(elements[1].tagName).toBe('SECTION')
   })
+
+  it('renders the Footer component with social links', () => {
+    render(<App />)
+    expect(screen.getByRole('link', { name: 'Facebook' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'GitHub' })).toBeInTheDocument()
+    expect(screen.getByText(/All rights reserved/)).toBeInTheDocument()
+  })
+
+  it('renders components in correct order: Header, Hero, then Footer', () => {
+    const { container } = render(<App />)
+    const header = container.querySelector('header')
+    const section = container.querySelector('section')
+    const footer = container.querySelector('footer')
+
+    expect(header).toBeInTheDocument()
+    expect(section).toBeInTheDocument()
+    expect(footer).toBeInTheDocument()
+
+    const headerIndex = Array.from(container.querySelectorAll('header, section, footer')).indexOf(header)
+    const sectionIndex = Array.from(container.querySelectorAll('header, section, footer')).indexOf(section)
+    const footerIndex = Array.from(container.querySelectorAll('header, section, footer')).indexOf(footer)
+
+    expect(headerIndex).toBeLessThan(sectionIndex)
+    expect(sectionIndex).toBeLessThan(footerIndex)
+  })
 })
