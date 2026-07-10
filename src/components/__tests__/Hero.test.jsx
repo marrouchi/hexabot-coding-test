@@ -57,4 +57,10 @@ describe('Hero', () => {
     expect(section).toHaveClass('py-20')
     expect(section).toHaveClass('sm:py-32')
   })
+
+  it('section has flex-1 class to push footer to bottom', () => {
+    const { container } = render(<Hero />)
+    const section = container.querySelector('section')
+    expect(section).toHaveClass('flex-1')
+  })
 })
