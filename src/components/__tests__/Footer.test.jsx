@@ -102,4 +102,41 @@ describe('Footer', () => {
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
   })
+
+  it('renders NewsletterForm component', () => {
+    render(<Footer />)
+    const emailInput = screen.getByPlaceholderText('Enter your email')
+    expect(emailInput).toBeInTheDocument()
+  })
+
+  it('renders newsletter email input with correct attributes', () => {
+    render(<Footer />)
+    const emailInput = screen.getByPlaceholderText('Enter your email')
+    expect(emailInput).toHaveAttribute('type', 'email')
+    expect(emailInput).toHaveAttribute('name', 'EMAIL')
+  })
+
+  it('renders subscribe button in newsletter form', () => {
+    render(<Footer />)
+    const subscribeButton = screen.getByRole('button', { name: 'Subscribe' })
+    expect(subscribeButton).toBeInTheDocument()
+  })
+
+  it('newsletter form is positioned above social links', () => {
+    const { container } = render(<Footer />)
+    const flexCol = container.querySelector('.flex.flex-col.items-center')
+    const children = flexCol?.children
+    expect(children).toBeTruthy()
+    // NewsletterForm is the first child
+    expect(children?.[0]).toBeInTheDocument()
+    // SocialLinks should be a child below it
+    const socialLinks = screen.getByRole('link', { name: 'Facebook' })
+    expect(socialLinks).toBeInTheDocument()
+  })
+
+  it('footer includes newsletter form for subscriptions', () => {
+    render(<Footer />)
+    expect(screen.getByPlaceholderText('Enter your email')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Subscribe' })).toBeInTheDocument()
+  })
 })

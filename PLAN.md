@@ -38,3 +38,25 @@ Build a React resume website for John Doe, a freelance web developer. The homepa
 4. Build Footer component (main footer section)
 5. Integrate Footer in App
 6. Write tests for new components
+
+---
+
+## Newsletter Form Feature (Mailchimp Embed)
+
+### Overview
+Add a Mailchimp newsletter subscription form to the footer, positioned above the social links. The form renders as a native HTML `<form>` that POSTs directly to the Mailchimp-hosted endpoint (classic embed pattern — no API key, no CORS issues). Submission opens the Mailchimp confirmation page in a new tab via `target="_blank"`.
+
+### Component Structure
+- **NewsletterForm** — Self-contained form component: email input, submit button, and honeypot hidden field (Mailchimp anti-bot). Accepts `actionUrl` prop so the Mailchimp POST URL can be swapped without touching the component.
+- **Footer** (updated) — Renders `NewsletterForm` above the existing `SocialLinks`.
+
+### Mailchimp Embed Details
+- Form action URL: placeholder `https://your-subdomain.us1.list-manage.com/subscribe/post?u=XXXX&amp;id=XXXX` (replace before deploy)
+- Required hidden fields: `b_<u>_<id>` honeypot (empty, prevents bots), `EMAIL` input name
+- Method: `POST`, encoding: `application/x-www-form-urlencoded`
+- Target: `_blank` (Mailchimp redirects to hosted confirmation page)
+
+### Build Order
+1. Build `NewsletterForm` component with placeholder action URL
+2. Update `Footer` to include `NewsletterForm` above `SocialLinks`
+3. Write tests for `NewsletterForm` and update `Footer` tests
