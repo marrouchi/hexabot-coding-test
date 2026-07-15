@@ -1,11 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Hero from '../Hero'
 
 describe('Hero', () => {
   it('renders John Doe heading', () => {
     render(<Hero />)
     const heading = screen.getByRole('heading', { name: 'John Doe' })
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('heading is level 1', () => {
+    render(<Hero />)
+    const heading = screen.getByRole('heading', { level: 1, name: 'John Doe' })
     expect(heading).toBeInTheDocument()
   })
 
@@ -29,6 +36,13 @@ describe('Hero', () => {
     expect(button).toHaveClass('text-white')
   })
 
+  it('CTA button has proper padding', () => {
+    render(<Hero />)
+    const button = screen.getByRole('button', { name: 'Get In Touch' })
+    expect(button).toHaveClass('px-8')
+    expect(button).toHaveClass('py-3')
+  })
+
   it('renders section with gradient background', () => {
     const { container } = render(<Hero />)
     const section = container.querySelector('section')
@@ -44,11 +58,23 @@ describe('Hero', () => {
     expect(heading).toHaveClass('sm:text-6xl')
   })
 
+  it('heading has bold weight', () => {
+    render(<Hero />)
+    const heading = screen.getByRole('heading', { name: 'John Doe' })
+    expect(heading).toHaveClass('font-bold')
+  })
+
   it('tagline has responsive text sizing', () => {
     render(<Hero />)
     const tagline = screen.getByText(/Full-stack web developer and freelancer crafting beautiful, responsive digital experiences/i)
     expect(tagline).toHaveClass('text-xl')
     expect(tagline).toHaveClass('sm:text-2xl')
+  })
+
+  it('tagline has gray color styling', () => {
+    render(<Hero />)
+    const tagline = screen.getByText(/Full-stack web developer and freelancer crafting beautiful, responsive digital experiences/i)
+    expect(tagline).toHaveClass('text-gray-700')
   })
 
   it('section has proper padding', () => {
@@ -62,5 +88,33 @@ describe('Hero', () => {
     const { container } = render(<Hero />)
     const section = container.querySelector('section')
     expect(section).toHaveClass('flex-1')
+  })
+
+  it('section has flex-1 for layout', () => {
+    const { container } = render(<Hero />)
+    const section = container.querySelector('section')
+    expect(section).toHaveClass('flex-1')
+  })
+
+  it('content container has proper text alignment', () => {
+    const { container } = render(<Hero />)
+    const contentDiv = container.querySelector('section > div')
+    expect(contentDiv).toHaveClass('text-center')
+    expect(contentDiv).toHaveClass('max-w-4xl')
+  })
+
+  it('CTA button is keyboard accessible', async () => {
+    const user = userEvent.setup()
+    render(<Hero />)
+    const button = screen.getByRole('button', { name: 'Get In Touch' })
+
+    await user.tab()
+    expect(button).toHaveFocus()
+  })
+
+  it('section is main content area', () => {
+    const { container } = render(<Hero />)
+    const section = container.querySelector('section')
+    expect(section?.tagName).toBe('SECTION')
   })
 })
