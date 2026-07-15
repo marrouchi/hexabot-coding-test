@@ -9,6 +9,12 @@ describe('Footer', () => {
     expect(footer).toBeInTheDocument()
   })
 
+  it('footer is semantic footer element', () => {
+    const { container } = render(<Footer />)
+    const footer = container.querySelector('footer')
+    expect(footer?.tagName).toBe('FOOTER')
+  })
+
   it('renders copyright text with current year', () => {
     render(<Footer />)
     const currentYear = new Date().getFullYear()
@@ -17,7 +23,12 @@ describe('Footer', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders SocialLinks component', () => {
+  it('renders John Doe name in copyright', () => {
+    render(<Footer />)
+    expect(screen.getByText(/John Doe/)).toBeInTheDocument()
+  })
+
+  it('renders SocialLinks component with all platforms', () => {
     render(<Footer />)
     expect(screen.getByRole('link', { name: 'Facebook' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Twitter' })).toBeInTheDocument()
@@ -25,11 +36,22 @@ describe('Footer', () => {
     expect(screen.getByRole('link', { name: 'GitHub' })).toBeInTheDocument()
   })
 
-  it('renders footer with proper styling', () => {
+  it('renders footer with background color styling', () => {
     const { container } = render(<Footer />)
     const footer = container.querySelector('footer')
     expect(footer).toHaveClass('bg-gray-50')
+  })
+
+  it('renders footer with top border', () => {
+    const { container } = render(<Footer />)
+    const footer = container.querySelector('footer')
     expect(footer).toHaveClass('border-t')
+  })
+
+  it('renders footer with proper inner padding', () => {
+    const { container } = render(<Footer />)
+    const footerContent = container.querySelector('footer > div')
+    expect(footerContent).toHaveClass('py-12')
   })
 
   it('renders footer content with flex layout', () => {
@@ -44,5 +66,40 @@ describe('Footer', () => {
     const copyrightText = container.querySelector('.text-gray-600')
     expect(copyrightText).toHaveClass('text-sm')
     expect(copyrightText).toHaveClass('text-center')
+  })
+
+  it('copyright text is a paragraph element', () => {
+    const { container } = render(<Footer />)
+    const copyrightParagraph = container.querySelector('footer p')
+    expect(copyrightParagraph?.tagName).toBe('P')
+  })
+
+  it('renders copyright symbol correctly', () => {
+    render(<Footer />)
+    const copyrightText = screen.getByText(/©/)
+    expect(copyrightText).toBeInTheDocument()
+  })
+
+  it('social links are positioned correctly', () => {
+    render(<Footer />)
+    const links = screen.getAllByRole('link')
+    expect(links.length).toBeGreaterThanOrEqual(4)
+  })
+
+  it('footer has semantic tag and proper structure', () => {
+    const { container } = render(<Footer />)
+    const footer = container.querySelector('footer')
+    expect(footer?.tagName).toBe('FOOTER')
+    const contentWrapper = footer?.querySelector('div')
+    expect(contentWrapper).toHaveClass('max-w-6xl')
+  })
+
+  it('renders all social links with correct security attributes', () => {
+    render(<Footer />)
+    const links = screen.getAllByRole('link')
+    links.forEach((link) => {
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
   })
 })
